@@ -8,7 +8,7 @@ function App() {
 
   // Load todos from API
   useEffect(() => {
-    axios.get('http://localhost:8000/api/v1/todos/')
+    axios.get('https://bdcalling108.pythonanywhere.com/api/v1/todos/')
       .then(response => {
         setTodos(response.data);
       });
@@ -17,7 +17,7 @@ function App() {
   // Add new todo
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:8000/api/v1/todos/', newTodo)
+    axios.post('https://bdcalling108.pythonanywhere.com/api/v1/todos/', newTodo)
       .then(response => {
         setTodos([...todos, response.data]);
         setNewTodo({ title: '', description: '' });
@@ -34,7 +34,7 @@ function App() {
 
   // Save updated todo
   const handleSave = (id, updatedTodo) => {
-    axios.put(`http://localhost:8000/api/v1/todos/${id}/`, updatedTodo)
+    axios.put(`https://bdcalling108.pythonanywhere.com/api/v1/todos/${id}/`, updatedTodo)
       .then(response => {
         const updatedTodos = todos.map(todo =>
           todo.id === id ? response.data : todo
@@ -45,7 +45,7 @@ function App() {
 
   // Delete a single todo
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:8000/api/v1/todos/${id}/`)
+    axios.delete(`https://bdcalling108.pythonanywhere.com/api/v1/todos/${id}/`)
       .then(() => {
         setTodos(todos.filter(todo => todo.id !== id));
       });
@@ -63,7 +63,7 @@ function App() {
   // Delete selected todos
   const handleDeleteSelected = () => {
     axios
-      .all(selectedTodos.map(id => axios.delete(`http://localhost:8000/api/v1/todos/${id}/`)))
+      .all(selectedTodos.map(id => axios.delete(`https://bdcalling108.pythonanywhere.com/api/v1/todos/${id}/`)))
       .then(() => {
         setTodos(todos.filter(todo => !selectedTodos.includes(todo.id)));
         setSelectedTodos([]);
